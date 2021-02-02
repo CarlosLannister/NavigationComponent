@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import kotlinx.android.synthetic.main.fragment_second.view.*
+import com.example.navigationcomponent.databinding.FragmentFirstBinding
+import com.example.navigationcomponent.databinding.FragmentSecondBinding
 
 
 class SecondFragment : Fragment() {
 
+    private lateinit var binding: FragmentSecondBinding
     val args: SecondFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -19,11 +21,12 @@ class SecondFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_second, container, false)
+        binding = FragmentSecondBinding.inflate(inflater, container, false)
+        val view = binding.root
 
         val myNumber = args.number
-        view.textView2.setText(myNumber.toString())
-        view.textView2.setOnClickListener{
+        binding.textView2.setText(myNumber.toString())
+        binding.textView2.setOnClickListener{
             Navigation.findNavController(view).navigate(R.id.action_secondFragment_to_firstFragment)
         }
 
